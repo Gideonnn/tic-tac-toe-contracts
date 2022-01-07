@@ -15,10 +15,10 @@
   "scripts": {
     "hardhat": "hardhat",
     "test": "hardhat test",
-    "format": "prettier --check \"{src,stories}/**/*.{js,jsx,ts,tsx}\"",
-    "format:fix": "prettier --write \"{src,stories}/**/*.{js,jsx,ts,tsx}\"",
-    "lint": "eslint \"{src,contracts,tests}/**/*.{js,jsx,ts,tsx}\"",
-    "lint:fix": "eslint --fix \"{src,contracts,tests}/**/*.{js,jsx,ts,tsx}\""
+    "format": "prettier --check \"test/**/*.{js,ts,sol}\"",
+    "format:fix": "prettier --write \"test/**/*.{js,ts,sol}\"",
+    "lint": "eslint \"{contracts,test}/**/*.{js,ts}\"",
+    "lint:fix": "eslint --fix \"{contracts,test}/**/*.{js,ts}\""
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.1"
