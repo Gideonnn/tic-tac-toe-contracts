@@ -4,9 +4,21 @@
   "description": "Web3 version of the famous Tic-Tac-Toe game",
   "author": "Gideon Spierings",
   "license": "WTFPL",
+  "files": [
+    "artifacts",
+    "contracts",
+    "typechain"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "hardhat": "hardhat",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "format": "prettier --check \"{src,stories}/**/*.{js,jsx,ts,tsx}\"",
+    "format:fix": "prettier --write \"{src,stories}/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "eslint \"{src,contracts,tests}/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint --fix \"{src,contracts,tests}/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.4.1"
