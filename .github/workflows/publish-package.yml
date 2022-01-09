@@ -36,7 +36,10 @@ jobs:
       - name: Get registry version
         id: registry_version
         run: |
-          version=$(npm view ${{ github.repository }} version)
+          pkg=${{ github.repository }}
+          pkg_lower=$(echo $pkg | tr '[:upper:]' '[:lower:]')
+          echo $pkg_lower
+          version=$(npm view @$pkg_lower version)
           echo $version
           echo ::set-output name=value::$version
 
