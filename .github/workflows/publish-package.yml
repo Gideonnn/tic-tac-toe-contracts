@@ -36,8 +36,8 @@ jobs:
       - name: Get registry version
         id: registry_version
         run: |
-          version=$(npm view ${{ github.repository }} version)
-          echo $version
+          lowercase=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+          version=$(npm view @$lowercase version)
           echo ::set-output name=value::$version
 
       - name: Validate version
