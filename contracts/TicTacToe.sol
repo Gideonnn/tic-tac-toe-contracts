@@ -24,7 +24,9 @@ contract TicTacToe is Ownable {
     mapping(address => bool) public playerHasActiveGame;
     mapping(address => uint256) public playerActiveGame;
 
-    function getBoard(uint256 gameId) external view returns (uint8[9] memory) {
+    function getBoard() external view returns (uint8[9] memory) {
+        require(_hasActiveGame(msg.sender), "Error: You don't have an active game.");
+        uint256 gameId = playerActiveGame[msg.sender];
         return games[gameId].board;
     }
 
