@@ -24,6 +24,10 @@ contract TicTacToe is Ownable {
     mapping(address => bool) public playerHasActiveGame;
     mapping(address => uint256) public playerActiveGame;
 
+    function getBoard(uint256 gameId) external view returns (uint8[9] memory) {
+        return games[gameId].board;
+    }
+
     function isPlayer1(uint256 _gameId, address _player) public view returns (bool) {
         return games[_gameId].player1 == _player;
     }
