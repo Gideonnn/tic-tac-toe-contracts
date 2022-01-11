@@ -30,6 +30,26 @@ contract TicTacToe is Ownable {
         return games[gameId].board;
     }
 
+    function getOpenGames() external view returns (TicTacToeGame[] memory) {
+        uint256 count = 0;
+        for (uint256 i = 0; i < games.length; i++) {
+            if (games[i].player2 == address(0)) {
+                count++;
+            }
+        }
+
+        TicTacToeGame[] memory openGames = new TicTacToeGame[](count);
+        uint256 index = 0;
+        for (uint256 i = 0; i < games.length; i++) {
+            if (games[i].player2 == address(0)) {
+                openGames[index] = games[i];
+                index++;
+            }
+        }
+
+        return openGames;
+    }
+
     function isPlayer1(uint256 _gameId, address _player) public view returns (bool) {
         return games[_gameId].player1 == _player;
     }
@@ -136,15 +156,19 @@ contract TicTacToe is Ownable {
     }
 
     function makeMove(uint256 _gameId, uint8 _cell) external {
-        require(_gameId < games.length);
+        require(_gameId < games.length, "Error: Game does not exist.");
 
         TicTacToeGame memory game = games[_gameId];
 
-        require(isPlayer1(_gameId, msg.sender) || isPlayer2(_gameId, msg.sender));
-        require(game.turn == msg.sender);
-        require(game.winner == address(0));
-        require(_cell < 9);
-        require(game.board[_cell] == 0);
+        require(game.player2 != address(0), "Error: This game has not started yet.");
+        require(
+            isPlayer1(_gameId, msg.sender) || isPlayer2(_gameId, msg.sender),
+            "Error: You are not playing in this game."
+        );
+        require(game.turn == msg.sender, "Error: It is not your turn.");
+        require(game.winner == address(0), "Error: This game has already ended.");
+        require(_cell < 9, "Error: Invalid cell.");
+        require(game.board[_cell] == 0, "Error: This cell is already occupied.");
 
         game.board[_cell] = msg.sender == game.player1 ? 1 : 2;
         emit MoveMade(_gameId, msg.sender, _cell);
