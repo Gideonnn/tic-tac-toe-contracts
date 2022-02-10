@@ -18,12 +18,20 @@ Use hardhat to test locally:
 yarn test
 ```
 
+## Build
+
+Use hardhat to build the contract:
+
+```bash
+yarn build
+```
+
 ## Deploy
 
 Use hardhat to deploy to the local network:
 
 ```bash
-yarn hardhat run scripts/deploy.ts --network localhost
+yarn start
 ```
 
 ## License
